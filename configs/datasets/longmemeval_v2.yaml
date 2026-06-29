@@ -1,0 +1,3 @@
+type: longmemeval_v2
+params:
+  path: ${LONGMEMEVAL_V2_EXPORT:-data/longmemeval_v2/export.jsonl}

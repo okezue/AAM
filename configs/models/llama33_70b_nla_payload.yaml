@@ -1,0 +1,18 @@
+type: hf_hidden
+params:
+  modelname: meta-llama/Llama-3.3-70B-Instruct
+  layer: 53
+  pooling: mean
+  outputdimension: 65536
+  topk: 192
+  seed: 0
+  maxlength: 4096
+  device: cuda
+  payloadmode: pooled
+nlapayload:
+  family: llama3.3-70b-l53
+  upstreamrepo: kitft/nla-inference
+  upstreaminferencefile: third_party/checkouts/nla-inference/nla_inference.py
+  avcheckpoint: kitft/Llama-3.3-70B-NLA-L53-av
+  archeckpoint: kitft/Llama-3.3-70B-NLA-L53-ar
+  sglangurl: http://localhost:30000

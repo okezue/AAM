@@ -1,0 +1,12 @@
+# Closed reader + open surrogate encoder. No direct hidden-state/KV access is assumed.
+encoder:
+  type: sentence_transformer
+  params:
+    modelname: sentence-transformers/all-MiniLM-L6-v2
+    outputdimension: 32768
+    topk: 128
+    seed: 0
+generator:
+  type: openai_responses
+  params:
+    model: ${OPENAI_MODEL:-gpt-4.1-mini}

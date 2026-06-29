@@ -1,0 +1,15 @@
+# Official Qwen-Scope TopK SAE. This condition requires a large-memory accelerator setup.
+type: qwen_scope
+params:
+  modelname: Qwen/Qwen3.5-27B
+  saerepoid: Qwen/SAE-Res-Qwen3.5-27B-W80K-L0_50
+  layer: 40
+  tokentopk: 50
+  topk: 192
+  pooling: positive_max
+  maxlength: 4096
+  tokenbatchsize: 8
+  device: auto
+  saedevice: cuda
+  dtype: bfloat16
+  payloadmode: pooled_residual

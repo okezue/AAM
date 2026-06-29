@@ -1,0 +1,11 @@
+encoder:
+  type: sentence_transformer
+  params:
+    modelname: sentence-transformers/all-MiniLM-L6-v2
+    outputdimension: 32768
+    topk: 128
+    seed: 0
+generator:
+  type: gemini
+  params:
+    model: ${GEMINI_MODEL:-gemini-2.5-flash}

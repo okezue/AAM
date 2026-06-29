@@ -1,0 +1,38 @@
+# Pre-register this smaller matrix before the full exploratory sweep.
+# All conditions materialize to schema-valid experiment YAML. GPU execution still requires the
+# exact Qwen model/SAE revisions to be resolved and locked.
+base: configs/experiments/l1_qwen35_2b_qwenscope.yaml
+conditions:
+  - name: dense_text_rag
+    modelfragment: configs/models/sentence_transformer.yaml
+    recurrencesteps: 0
+    plasticityrule: none
+    edgecondition: zero
+    temporallearningrate: 0.0
+  - name: activation_knn
+    modelfragment: configs/models/qwen35_2b_qwen_scope.yaml
+    recurrencesteps: 0
+    plasticityrule: none
+    edgecondition: zero
+    temporallearningrate: 0.0
+  - name: aam_full
+    modelfragment: configs/models/qwen35_2b_qwen_scope.yaml
+    recurrencesteps: 2
+    plasticityrule: covariance
+    edgecondition: learned
+  - name: aam_zero_graph
+    modelfragment: configs/models/qwen35_2b_qwen_scope.yaml
+    recurrencesteps: 2
+    plasticityrule: covariance
+    edgecondition: zero
+  - name: aam_shuffled_graph
+    modelfragment: configs/models/qwen35_2b_qwen_scope.yaml
+    recurrencesteps: 2
+    plasticityrule: covariance
+    edgecondition: shuffled_degree_preserving
+    edgeseed: 4099
+primaryhypotheses:
+  H1: activation_knn > dense_text_rag on paraphrased and multi-hop source retrieval at equal bytes
+  H2: aam_full > activation_knn on two/three-hop retrieval without higher negative-hit rate
+  H3: aam_full > aam_shuffled_graph, demonstrating learned association rather than recurrence compute
+  H4: verified replay > unverified replay under injected false-memory trials

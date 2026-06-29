@@ -1,0 +1,18 @@
+type: hf_hidden
+params:
+  modelname: google/gemma-3-27b-it
+  layer: 41
+  pooling: mean
+  outputdimension: 65536
+  topk: 192
+  seed: 0
+  maxlength: 4096
+  device: cuda
+  payloadmode: pooled
+nlapayload:
+  family: gemma3-27b-l41
+  upstreamrepo: kitft/nla-inference
+  upstreaminferencefile: third_party/checkouts/nla-inference/nla_inference.py
+  avcheckpoint: kitft/nla-gemma3-27b-L41-av
+  archeckpoint: kitft/nla-gemma3-27b-L41-ar
+  sglangurl: http://localhost:30000

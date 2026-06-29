@@ -1,0 +1,37 @@
+base: configs/experiments/l1_activation_retrieval.yaml
+factors:
+  encoder:
+    - hashing
+    - sentence_transformer
+    - hf_hidden_random_projection
+    - sae_lens
+  featuresite:
+    - residual_pre
+    - residual_post
+    - mlp_post
+    - attention_output
+  layerfraction: [0.25, 0.5, 0.75, 1.0]
+  pooling: [mean, max, positive_max, last, boundary_mean]
+  topk: [32, 64, 128, 256, 512]
+  plasticityrule: [none, hebb, covariance, oja, bcm]
+  recurrencesteps: [0, 1, 2, 4, 8]
+  edgecondition: [learned, shuffled_degree_preserving, random_degree_matched, zero]
+  temporallinks: [off, forward, bidirectional]
+  queryanchor: [0.25, 0.5, 1.0, 2.0]
+  hubpenalty: [0.0, 0.25, 0.5, 1.0]
+  replay: [none, random, recency, salience, associative, associative_verified]
+  payload: [source_text, pooled_activation_int8, learned_codec, nla, memory_tokens, cross_attention, direct_kv]
+  capacitypolicy: [unbounded, fifo, lru, salience, prototype_consolidation]
+controls:
+  matched:
+    - memory_bytes
+    - retrieved_items
+    - encoder_forward_passes
+    - recall_flops
+    - generation_tokens
+statistics:
+  primarymetric: retrieval_recall
+  pairedbootstrapsamples: 10000
+  pairedrandomizationsamples: 100000
+  multiplecomparisons: holm_bonferroni
+  seeds: [11, 29, 47, 71, 101]

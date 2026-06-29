@@ -1,0 +1,16 @@
+name: c13_multimodal_state_tensor
+seed: 13
+dataset: {type: state_tensor, params: {examplespertask: 40, seed: 13}}
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 32768, topk: 160}}
+  graph: {rule: covariance, learningrate: 0.10, temporallearningrate: 0.04, hubpenalty: 0.7}
+  retrieval: {topk: 5, recurrencesteps: 2, featuretopk: 192, exactweight: 0.45, associativeweight: 0.40, temporalweight: 0.05}
+  context:
+    encoder: {dimension: 4096, topk: 96}
+    binding: {bindingdimension: 4096, topk: 256, contextweight: 0.75, bindingweight: 0.60}
+  safety: {pseudomultimodalstateenabled: true, notextprimary: true}
+generator: {type: none}
+evaluation: {limit: 40, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c13_multimodal_state_tensor
+notes: Numeric/state tensor context becomes part of the activation engram address.

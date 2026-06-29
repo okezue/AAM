@@ -1,0 +1,16 @@
+name: c5_recurrent_completion
+seed: 5
+dataset:
+  type: synthetic
+  params: {tasks: [multi_hop, hub_distractor, interference], examplespertask: 30, seed: 5, distractors: 16}
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 32768, topk: 160}}
+  graph: {rule: covariance, learningrate: 0.12, temporallearningrate: 0.08, hubpenalty: 0.9, maxdegree: 96}
+  retrieval: {topk: 5, recurrencesteps: 4, featuretopk: 192, queryanchor: 1.2, associationstrength: 0.80, temporalstrength: 0.15, exactweight: 0.35, associativeweight: 0.55, temporalweight: 0.05}
+  context: {encoder: {dimension: 2048, topk: 32}, binding: {bindingdimension: 4096, topk: 224}}
+  completion: {episodefeedbackstrength: 0.40, episodenodeweight: 0.30, topepisodenodes: 96}
+generator: {type: none}
+evaluation: {limit: 90, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c5_recurrent_completion
+notes: 'Depth sweep target: recurrent attractor-like pattern completion with query anchoring.'

@@ -1,0 +1,15 @@
+name: c12_future_simulation
+seed: 12
+dataset: {type: prospection, params: {examplespertask: 40, seed: 12}}
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 32768, topk: 160}}
+  graph: {rule: covariance, learningrate: 0.10, temporallearningrate: 0.06, hubpenalty: 0.7}
+  retrieval: {topk: 5, recurrencesteps: 2, featuretopk: 192, exactweight: 0.50, associativeweight: 0.35, temporalweight: 0.05}
+  context: {encoder: {dimension: 2048, topk: 32}, binding: {bindingdimension: 4096, topk: 224}}
+  prospection: {enabled: true, maxprompts: 6, authority: 0.05}
+  safety: {prospectivetracesfactualauthority: 0.0, quarantineselfgenerated: true}
+generator: {type: none}
+evaluation: {limit: 40, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c12_future_simulation
+notes: Future-query route precomputation and latent recombination; simulated traces are not factual memory.

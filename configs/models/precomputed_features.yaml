@@ -1,0 +1,6 @@
+type: precomputed
+params:
+  path: data/features/PLACEHOLDER_FEATURE_ARTIFACT.jsonl
+  # Optional dimension guard. Leave absent to infer from the first record.
+  dimension: 32768
+  verifytext: false

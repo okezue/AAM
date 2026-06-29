@@ -1,0 +1,52 @@
+name: l3_online_replay
+seed: 17
+dataset:
+  type: longmemeval
+  params:
+    variant: m
+    repoid: xiaowu0162/LongMemEval
+    cachedir: data/hf
+memory:
+  encoder:
+    type: sae_lens
+    params:
+      modelname: meta-llama/Llama-3.1-8B
+      saerelease: llama_scope_lxr_8x
+      saeid: PLACEHOLDER_VERIFY_IN_SAE_LENS_REGISTRY
+      topk: 128
+      pooling: positive_max
+      maxlength: 4096
+      device: cuda
+  graph:
+    rule: covariance
+    learningrate: 0.08
+    temporallearningrate: 0.08
+    decay: 0.001
+    decayinterval: 100
+    maxdegree: 128
+    hubpenalty: 0.5
+  retrieval:
+    topk: 10
+    recurrencesteps: 2
+    featuretopk: 256
+    recencyweight: 0.1
+  store:
+    type: sqlite
+    path: runs/l3_online_replay/memory.sqlite3
+  replay:
+    enabled: true
+    strategy: salience
+    budgetpercycle: 64
+    intervalwrites: 500
+    sourceverification: checksum
+  consolidation:
+    enabled: true
+    fixedcapacityepisodes: 10000
+    similaritythreshold: 0.92
+generator:
+  type: none
+evaluation:
+  resetbetweenexamples: true
+  bootstrapsamples: 10000
+outputdir: runs/l3_online_replay
+notes: Run no replay, random, recency, salience, associative, verified associative, and consolidation conditions.

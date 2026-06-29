@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+title: "Activation-Associative Memory Experimental Scaffold"
+message: "Please cite the repository release and the upstream models, datasets, and baselines used in your run."
+type: software
+version: 0.1.0
+date-released: 2026-06-21
+license: Apache-2.0

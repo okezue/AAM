@@ -1,0 +1,17 @@
+name: c1_context_bound_engrams
+seed: 1
+dataset: {type: contextual_memory, params: {examplespertask: 40, seed: 1}}
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 16384, topk: 128}}
+  graph: {rule: covariance, learningrate: 0.08, temporallearningrate: 0.02, hubpenalty: 0.6}
+  retrieval: {topk: 5, recurrencesteps: 1, featuretopk: 160, exactweight: 0.55, associativeweight: 0.30, temporalweight: 0.0, confidenceweight: 0.05}
+  context:
+    encoder: {dimension: 4096, topk: 64}
+    binding: {bindingdimension: 4096, topk: 192, contextweight: 0.65, bindingweight: 0.55}
+    graph: {learningrate: 0.12, maxdegree: 128}
+  completion: {contextscoreweight: 0.25, contextstrength: 0.35, episodenodeweight: 0.15}
+generator: {type: none}
+evaluation: {limit: 40, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c1_context_bound_engrams
+notes: Tests sensory/context association as part of the activation address, not metadata-only filtering.

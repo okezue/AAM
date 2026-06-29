@@ -1,0 +1,18 @@
+type: hf_hidden
+params:
+  modelname: google/gemma-3-12b-it
+  layer: 32
+  pooling: mean
+  outputdimension: 32768
+  topk: 128
+  seed: 0
+  maxlength: 4096
+  device: cuda
+  payloadmode: pooled
+nlapayload:
+  family: gemma3-12b-l32
+  upstreamrepo: kitft/nla-inference
+  upstreaminferencefile: third_party/checkouts/nla-inference/nla_inference.py
+  avcheckpoint: kitft/nla-gemma3-12b-L32-av
+  archeckpoint: kitft/nla-gemma3-12b-L32-ar
+  sglangurl: http://localhost:30000

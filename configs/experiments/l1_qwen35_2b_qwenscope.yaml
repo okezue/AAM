@@ -1,0 +1,63 @@
+name: l1_qwen35_2b_qwenscope
+seed: 11
+dataset:
+  type: synthetic
+  params:
+    tasks: [paired_associate, paraphrase, multi_hop, temporal_update, interference, hub_distractor, random_string]
+    examplespertask: 200
+    distractors: 32
+    seed: 11
+memory:
+  encoder:
+    type: qwen_scope
+    params:
+      modelname: Qwen/Qwen3.5-2B-Base
+      saerepoid: Qwen/SAE-Res-Qwen3.5-2B-Base-W32K-L0_50
+      layer: 16
+      tokentopk: 50
+      topk: 128
+      pooling: positive_max
+      maxlength: 4096
+      tokenbatchsize: 32
+      device: cuda
+      saedevice: cuda
+      dtype: bfloat16
+      payloadmode: pooled_residual
+  graph:
+    learningrate: 0.1
+    temporallearningrate: 0.08
+    decay: 0.0005
+    decayinterval: 500
+    rule: covariance
+    maxdegree: 128
+    normalizeafterwrite: true
+    allownegativeedges: false
+    hubpenalty: 0.5
+    maxpairfeatures: 128
+    edgecondition: learned
+    edgeseed: 11
+  retrieval:
+    topk: 10
+    candidatelimit: 1000
+    recurrencesteps: 2
+    featuretopk: 256
+    queryanchor: 1.0
+    associationstrength: 0.65
+    temporalstrength: 0.15
+    exactweight: 0.6
+    associativeweight: 0.35
+    temporalweight: 0.05
+  store:
+    type: sqlite
+    path: runs/l1_qwen35_2b_qwenscope/memory.sqlite3
+  replay:
+    enabled: false
+  consolidation:
+    enabled: false
+generator:
+  type: none
+evaluation:
+  resetbetweenexamples: true
+  bootstrapsamples: 10000
+outputdir: runs/l1_qwen35_2b_qwenscope
+notes: Exact public Qwen-Scope adapter; pin model_revision and sae_revision before confirmatory execution.

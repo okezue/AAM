@@ -1,0 +1,19 @@
+name: c6_dopamine_gated_writes
+seed: 6
+dataset:
+  type: synthetic
+  params: {tasks: [paired_associate, replay_poison, temporal_update, random_string], examplespertask: 25, seed: 6, distractors: 12}
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 32768, topk: 160}}
+  graph: {rule: covariance, learningrate: 0.10, temporallearningrate: 0.08, hubpenalty: 0.7, maxdegree: 96}
+  retrieval: {topk: 5, recurrencesteps: 2, featuretopk: 192, exactweight: 0.50, associativeweight: 0.35, temporalweight: 0.10, confidenceweight: 0.10}
+  context: {encoder: {dimension: 2048, topk: 32}, binding: {bindingdimension: 4096, topk: 224}}
+  dopamine:
+    positiveweights: {novelty: 0.9, useremphasis: 0.8, downstreamutility: 0.8, poisonrisk: -1.5}
+    negativeweights: {contradiction: 1.2, poisonrisk: 1.0, correction: 0.8}
+  allocation: {hubpenalty: 0.7, noveltygain: 0.4, utilitygain: 0.3}
+generator: {type: none}
+evaluation: {limit: 100, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c6_dopamine_gated_writes
+notes: Tests explicit dopamine-like write gate metrics versus uniform/novelty-only controls.

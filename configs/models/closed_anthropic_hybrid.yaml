@@ -1,0 +1,11 @@
+encoder:
+  type: sentence_transformer
+  params:
+    modelname: sentence-transformers/all-MiniLM-L6-v2
+    outputdimension: 32768
+    topk: 128
+    seed: 0
+generator:
+  type: anthropic_messages
+  params:
+    model: ${ANTHROPIC_MODEL:-claude-sonnet-4-5}

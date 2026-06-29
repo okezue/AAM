@@ -1,0 +1,14 @@
+name: c7_latent_payload_codec
+seed: 7
+dataset: {type: synthetic, params: {tasks: [paired_associate, paraphrase, random_string], examplespertask: 25, seed: 7}}
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 32768, topk: 160}}
+  graph: {rule: covariance, learningrate: 0.10, temporallearningrate: 0.06, hubpenalty: 0.6}
+  retrieval: {topk: 5, recurrencesteps: 2, featuretopk: 192, exactweight: 0.55, associativeweight: 0.35, temporalweight: 0.05}
+  context: {encoder: {dimension: 2048, topk: 32}, binding: {bindingdimension: 4096, topk: 224}}
+  safety: {notextprimary: true, payloadladder: [sparse_code, quantized_hidden, memory_tokens, cross_attention]}
+generator: {type: none}
+evaluation: {limit: 75, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c7_latent_payload_codec
+notes: Retrieval IDs are fixed; payload experiments compare latent packets against source fallback at matched bytes.

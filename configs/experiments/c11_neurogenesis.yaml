@@ -1,0 +1,15 @@
+name: c11_neurogenesis
+seed: 11
+dataset: {type: neurogenesis, params: {examplespertask: 40, seed: 11, distractors: 12}}
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 32768, topk: 160}}
+  graph: {rule: covariance, learningrate: 0.10, temporallearningrate: 0.04, hubpenalty: 0.8, maxdegree: 96}
+  retrieval: {topk: 5, recurrencesteps: 2, featuretopk: 192, exactweight: 0.45, associativeweight: 0.40, temporalweight: 0.05}
+  context: {encoder: {dimension: 2048, topk: 32}, binding: {bindingdimension: 4096, topk: 224}}
+  neurogenesis: {enabled: true, reservedfeatures: 1024, birththreshold: 0.35, maturationhits: 3}
+  allocation: {noveltygain: 0.5, utilitygain: 0.3, hubpenalty: 0.8}
+generator: {type: none}
+evaluation: {limit: 40, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c11_neurogenesis
+notes: Feature birth/splitting proxy under novelty plus interference; immature features have low authority until verified.

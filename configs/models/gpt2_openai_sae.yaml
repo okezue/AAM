@@ -1,0 +1,13 @@
+# OpenAI's public sparse_autoencoder repository includes GPT-2-small activation examples.
+# It is not an SAE-Lens release; use a project-specific provider or export weights to SAE-Lens.
+type: hf_hidden
+params:
+  modelname: openai-community/gpt2
+  layer: 8
+  pooling: mean
+  outputdimension: 32768
+  topk: 128
+  seed: 0
+  maxlength: 1024
+  device: cuda
+  payloadmode: pooled

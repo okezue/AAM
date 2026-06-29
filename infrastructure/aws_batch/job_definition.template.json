@@ -1,0 +1,24 @@
+{
+  "jobDefinitionName": "aam-gpu",
+  "type": "container",
+  "platformCapabilities": ["EC2"],
+  "containerProperties": {
+    "image": "REPLACE_WITH_ECR_IMAGE_URI",
+    "command": ["bash", "-lc", "aws s3 cp $AAM_CONFIG_URI /tmp/experiment.yaml && aam run /tmp/experiment.yaml --output-dir /tmp/run && aws s3 sync /tmp/run $AAM_OUTPUT_URI"],
+    "resourceRequirements": [
+      {"type": "VCPU", "value": "8"},
+      {"type": "MEMORY", "value": "65536"},
+      {"type": "GPU", "value": "1"}
+    ],
+    "jobRoleArn": "REPLACE_WITH_LEAST_PRIVILEGE_JOB_ROLE_ARN",
+    "executionRoleArn": "REPLACE_WITH_BATCH_EXECUTION_ROLE_ARN",
+    "environment": [
+      {"name": "PYTHONHASHSEED", "value": "0"},
+      {"name": "TOKENIZERS_PARALLELISM", "value": "false"}
+    ],
+    "linuxParameters": {"sharedMemorySize": 16384}
+  },
+  "retryStrategy": {"attempts": 1},
+  "timeout": {"attemptDurationSeconds": 86400},
+  "parameters": {}
+}

@@ -1,0 +1,12 @@
+type: transformer_lens_hook
+params:
+  modelname: Qwen/Qwen2.5-1.5B-Instruct
+  layer: 20
+  site: residual_post
+  pooling: mean
+  outputdimension: 32768
+  topk: 128
+  seed: 0
+  maxlength: 2048
+  device: cuda
+  payloadmode: pooled

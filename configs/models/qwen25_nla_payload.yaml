@@ -1,0 +1,19 @@
+# Sparse address encoder. NLA is a separate, optional payload verbalizer/reconstructor.
+type: hf_hidden
+params:
+  modelname: Qwen/Qwen2.5-7B-Instruct
+  layer: 20
+  pooling: mean
+  outputdimension: 32768
+  topk: 128
+  seed: 0
+  maxlength: 4096
+  device: cuda
+  payloadmode: pooled
+nlapayload:
+  family: qwen2.5-7b-l20
+  upstreamrepo: kitft/nla-inference
+  upstreaminferencefile: third_party/checkouts/nla-inference/nla_inference.py
+  avcheckpoint: kitft/nla-qwen2.5-7b-L20-av
+  archeckpoint: kitft/nla-qwen2.5-7b-L20-ar
+  sglangurl: http://localhost:30000

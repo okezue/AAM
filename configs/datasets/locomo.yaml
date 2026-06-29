@@ -1,0 +1,3 @@
+type: locomo
+params:
+  cachedir: data/locomo

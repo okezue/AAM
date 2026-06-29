@@ -1,0 +1,6 @@
+type: ruler
+params:
+  repoid: self-long/RULER-llama3-1M
+  configname: 32k
+  split: train
+  cachedir: data/hf

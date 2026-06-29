@@ -1,0 +1,66 @@
+name: l3b_continual_retention
+seed: 17
+dataset:
+  type: continual_retention
+  params:
+    steps: 500
+    seed: 17
+    distractorsperstep: 3
+    probelags: [0, 1, 5, 20, 50, 100, 250]
+    payloadlength: 24
+memory:
+  encoder:
+    type: hashing
+    params:
+      dimension: 65536
+      topk: 128
+      wordngrams: [1, 2]
+      positiveonly: true
+      seed: 17
+  graph:
+    rule: covariance
+    learningrate: 0.08
+    temporallearningrate: 0.06
+    decay: 0.001
+    decayinterval: 100
+    maxdegree: 128
+    maxpairfeatures: 128
+    hubpenalty: 0.5
+    edgecondition: learned
+    edgeseed: 17
+  retrieval:
+    topk: 8
+    candidatelimit: 1000
+    recurrencesteps: 2
+    featuretopk: 256
+    queryanchor: 1.0
+    associationstrength: 0.65
+    temporalstrength: 0.1
+    exactweight: 0.65
+    associativeweight: 0.3
+    temporalweight: 0.05
+  store:
+    type: sqlite
+    path: runs/l3b_continual_retention/memory.sqlite3
+  replay:
+    enabled: true
+    strategy: salience
+    budgetpercycle: 32
+    intervalwrites: 50
+    learningscale: 0.25
+    temporal: false
+  consolidation:
+    enabled: true
+    fixedcapacityepisodes: 400
+    similaritythreshold: 0.96
+    minimumgroupsize: 3
+    evictionpolicy: salience
+    rebuildgraphaftermaintenance: true
+generator:
+  type: none
+evaluation:
+  resetbetweenexamples: false
+  bootstrapsamples: 5000
+  clusterkey: cluster_id
+outputdir: runs/l3b_continual_retention
+notes: CPU-capable continual stream protocol. Replace hashing with a locked activation encoder for the confirmatory L3 run.

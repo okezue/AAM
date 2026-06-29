@@ -1,0 +1,4 @@
+type: contextual_memory
+params:
+  examplespertask: 25
+  seed: 0

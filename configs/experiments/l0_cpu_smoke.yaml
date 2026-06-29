@@ -1,0 +1,66 @@
+name: l0_cpu_smoke
+seed: 7
+dataset:
+  type: synthetic
+  params:
+    tasks: [paired_associate, paraphrase, multi_hop, temporal_update, hub_distractor, random_string]
+    examplespertask: 3
+    distractors: 5
+    seed: 7
+memory:
+  encoder:
+    type: hashing
+    params:
+      dimension: 8192
+      topk: 64
+      wordngrams: [1, 2]
+      positiveonly: true
+      seed: 7
+  graph:
+    learningrate: 0.22
+    temporallearningrate: 0.15
+    decay: 0.001
+    decayinterval: 100
+    rule: hebb
+    maxdegree: 96
+    normalizeafterwrite: true
+    allownegativeedges: false
+    hubpenalty: 0.5
+    maxpairfeatures: 64
+  retrieval:
+    topk: 5
+    candidatelimit: 200
+    recurrencesteps: 2
+    featuretopk: 96
+    queryanchor: 1.0
+    associationstrength: 0.75
+    temporalstrength: 0.2
+    exactweight: 0.6
+    associativeweight: 0.35
+    temporalweight: 0.05
+    recencyweight: 0.0
+    confidenceweight: 0.0
+    normalizemessages: true
+  salience:
+    base: 0.5
+    surpriseweight: 0.25
+    taskweight: 0.15
+    userweight: 0.2
+    noveltyweight: 0.25
+    redundancyweight: 0.15
+    minimum: 0.05
+    maximum: 2.0
+  store:
+    type: memory
+  replay:
+    enabled: false
+  consolidation:
+    enabled: false
+generator:
+  type: none
+evaluation:
+  resetbetweenexamples: true
+  bootstrapsamples: 500
+  limit: 18
+outputdir: runs/l0_cpu_smoke
+notes: Dependency-free structural smoke test; not a semantic performance claim.

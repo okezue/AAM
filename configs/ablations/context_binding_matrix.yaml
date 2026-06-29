@@ -1,0 +1,21 @@
+base: configs/experiments/c1_context_bound_engrams.yaml
+conditions:
+  - name: hidden_plus_context_binding
+    memory.context.binding.contextweight: 0.65
+    memory.context.binding.bindingweight: 0.55
+    memory.completion.contextstrength: 0.35
+    memory.completion.contextscoreweight: 0.25
+  - name: hidden_only_no_context
+    memory.context.binding.contextweight: 0.0
+    memory.context.binding.bindingweight: 0.0
+    memory.completion.contextstrength: 0.0
+    memory.completion.contextscoreweight: 0.0
+  - name: metadata_only_no_address_binding
+    memory.context.binding.contextweight: 0.0
+    memory.context.binding.bindingweight: 0.0
+    memory.completion.contextstrength: 0.0
+    memory.completion.contextscoreweight: 0.35
+  - name: context_overweighted
+    memory.context.binding.contextweight: 1.4
+    memory.context.binding.bindingweight: 0.8
+    memory.completion.contextstrength: 0.6

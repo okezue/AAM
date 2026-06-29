@@ -1,0 +1,18 @@
+name: c0_sparse_engram_retrieval
+seed: 0
+dataset:
+  type: synthetic
+  params:
+    tasks: [paired_associate, paraphrase, interference, random_string]
+    examplespertask: 20
+    seed: 0
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 16384, topk: 128, wordngrams: [1, 2]}}
+  graph: {rule: none, learningrate: 0.0, temporallearningrate: 0.0, hubpenalty: 0.5}
+  retrieval: {topk: 5, recurrencesteps: 0, featuretopk: 128, exactweight: 1.0, associativeweight: 0.0, temporalweight: 0.0}
+  context: {encoder: {dimension: 2048, topk: 32}, binding: {bindingdimension: 2048, topk: 160}}
+generator: {type: none}
+evaluation: {limit: 80, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c0_sparse_engram_retrieval
+notes: Sparse hidden/context engram addresses only. No Hebbian graph, replay, or text generation.

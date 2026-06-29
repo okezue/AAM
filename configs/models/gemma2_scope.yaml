@@ -1,0 +1,10 @@
+# Verify the release/saeid against the current SAE-Lens release registry before execution.
+type: sae_lens
+params:
+  modelname: google/gemma-2-2b
+  saerelease: gemma-scope-2b-pt-res-canonical
+  saeid: layer_12/width_16k/canonical
+  topk: 128
+  pooling: positive_max
+  maxlength: 2048
+  device: cuda

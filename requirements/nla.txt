@@ -1,0 +1,11 @@
+torch>=2.3
+transformers>=4.48
+safetensors>=0.4
+huggingface-hub>=0.27
+httpx>=0.27
+orjson>=3.10
+PyYAML>=6.0
+numpy>=1.26
+pyarrow>=17
+# The AV server is intentionally installed separately because sglang has platform-specific extras:
+# pip install "sglang[all]>=0.5.6"

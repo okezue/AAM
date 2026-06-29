@@ -1,0 +1,17 @@
+base: configs/experiments/c11_neurogenesis.yaml
+conditions:
+  - name: neurogenesis_enabled
+    memory.neurogenesis.enabled: true
+    memory.neurogenesis.reservedfeatures: 1024
+    memory.neurogenesis.birththreshold: 0.35
+  - name: fixed_codebook_no_birth
+    memory.neurogenesis.enabled: false
+    memory.neurogenesis.reservedfeatures: 0
+  - name: too_eager_birth
+    memory.neurogenesis.enabled: true
+    memory.neurogenesis.reservedfeatures: 2048
+    memory.neurogenesis.birththreshold: 0.05
+  - name: conservative_birth
+    memory.neurogenesis.enabled: true
+    memory.neurogenesis.reservedfeatures: 1024
+    memory.neurogenesis.birththreshold: 0.75

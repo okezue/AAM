@@ -1,0 +1,30 @@
+base: configs/experiments/c3_hebbian_graph.yaml
+conditions:
+  - name: aam_v2_full_learned_graph
+    edgecondition: learned
+    recurrencesteps: 3
+    memory.completion.episodefeedbackstrength: 0.35
+    memory.completion.contextstrength: 0.25
+  - name: sparse_engram_no_graph_depth0
+    edgecondition: zero
+    recurrencesteps: 0
+    memory.retrieval.associationstrength: 0.0
+    memory.retrieval.temporalstrength: 0.0
+    memory.completion.episodefeedbackstrength: 0.0
+  - name: dense_activation_control_placeholder
+    modelfragment: configs/models/precomputed_features.yaml
+    edgecondition: zero
+    recurrencesteps: 0
+    memory.encoder.params.featuremode: dense_hidden_knn
+  - name: text_rag_control_placeholder
+    edgecondition: zero
+    recurrencesteps: 0
+    memory.safety.primarysubstrate: raw_text_control_only
+  - name: shuffled_degree_preserving_graph
+    edgecondition: shuffled_degree_preserving
+    edgeseed: 17
+    recurrencesteps: 3
+  - name: random_degree_matched_graph
+    edgecondition: random_degree_matched
+    edgeseed: 23
+    recurrencesteps: 3

@@ -1,0 +1,51 @@
+name: l1_activation_retrieval_gemma_scope
+seed: 11
+dataset:
+  type: synthetic
+  params:
+    tasks: [paired_associate, paraphrase, multi_hop, temporal_update, interference, hub_distractor]
+    examplespertask: 200
+    distractors: 32
+    seed: 11
+memory:
+  encoder:
+    type: sae_lens
+    params:
+      modelname: google/gemma-2-2b
+      saerelease: gemma-scope-2b-pt-res-canonical
+      saeid: PLACEHOLDER_VERIFY_IN_SAE_LENS_REGISTRY
+      topk: 128
+      pooling: positive_max
+      maxlength: 2048
+      device: cuda
+  graph:
+    learningrate: 0.1
+    temporallearningrate: 0.08
+    decay: 0.0005
+    decayinterval: 500
+    rule: covariance
+    maxdegree: 128
+    normalizeafterwrite: true
+    hubpenalty: 0.5
+    maxpairfeatures: 128
+  retrieval:
+    topk: 10
+    candidatelimit: 1000
+    recurrencesteps: 2
+    featuretopk: 256
+    queryanchor: 1.0
+    associationstrength: 0.65
+    temporalstrength: 0.15
+    exactweight: 0.6
+    associativeweight: 0.35
+    temporalweight: 0.05
+  store:
+    type: sqlite
+    path: runs/l1_activation_retrieval/memory.sqlite3
+generator:
+  type: none
+evaluation:
+  resetbetweenexamples: true
+  bootstrapsamples: 10000
+outputdir: runs/l1_activation_retrieval
+notes: Compare against dense embeddings, random projection, SAE kNN, recurrence=0, and shuffled graph.

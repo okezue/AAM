@@ -1,0 +1,15 @@
+name: c2_episode_index_identity
+seed: 2
+dataset: {type: overlap_identity, params: {examplespertask: 40, seed: 2, overlapcount: 7}}
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 32768, topk: 160}}
+  graph: {rule: covariance, learningrate: 0.08, temporallearningrate: 0.02, hubpenalty: 0.7, maxdegree: 96}
+  retrieval: {topk: 5, recurrencesteps: 2, featuretopk: 192, exactweight: 0.45, associativeweight: 0.35, temporalweight: 0.0}
+  context: {encoder: {dimension: 4096, topk: 64}, binding: {bindingdimension: 4096, topk: 224, contextweight: 0.55, bindingweight: 0.55}}
+  episodeindex: {maxfeaturesperepisode: 224}
+  completion: {episodefeedbackstrength: 0.45, episodenodeweight: 0.35, contextscoreweight: 0.20}
+generator: {type: none}
+evaluation: {limit: 40, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c2_episode_index_identity
+notes: 'Synapse-specific identity: overlapping sparse features should still route to distinct episode payloads.'

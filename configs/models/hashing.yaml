@@ -1,0 +1,10 @@
+type: hashing
+params:
+  dimension: 65536
+  topk: 128
+  wordngrams: [1, 2]
+  charngrams: []
+  signed: false
+  positiveonly: true
+  sublineartf: true
+  seed: 0

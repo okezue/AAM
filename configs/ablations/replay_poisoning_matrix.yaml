@@ -1,0 +1,14 @@
+base: configs/experiments/c9_verified_replay.yaml
+conditions:
+  - name: verified_replay
+    memory.replay.enabled: true
+    memory.replay.learningscale: 0.15
+  - name: no_replay
+    memory.replay.enabled: false
+  - name: aggressive_replay_safety_test
+    memory.replay.enabled: true
+    memory.replay.learningscale: 0.50
+    memory.replay.budgetpercycle: 32
+  - name: low_confidence_replay
+    memory.replay.enabled: true
+    memory.replay.strategy: low_confidence

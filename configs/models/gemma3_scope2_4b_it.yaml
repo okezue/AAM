@@ -1,0 +1,10 @@
+# Gemma Scope 2 covers Gemma 3 PT/IT variants. Exact IDs are release-version-sensitive.
+type: sae_lens
+params:
+  modelname: google/gemma-3-4b-it
+  saerelease: gemma-scope-2-gemma-3-4b-it
+  saeid: PLACEHOLDER_SELECT_LAYER_AND_SITE_FROM_SAE_LENS_REGISTRY
+  topk: 128
+  pooling: positive_max
+  maxlength: 4096
+  device: cuda

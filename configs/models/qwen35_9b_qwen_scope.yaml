@@ -1,0 +1,15 @@
+# Official Qwen-Scope TopK SAE, residual stream at every transformer layer.
+type: qwen_scope
+params:
+  modelname: Qwen/Qwen3.5-9B-Base
+  saerepoid: Qwen/SAE-Res-Qwen3.5-9B-Base-W64K-L0_50
+  layer: 20
+  tokentopk: 50
+  topk: 192
+  pooling: positive_max
+  maxlength: 4096
+  tokenbatchsize: 16
+  device: cuda
+  saedevice: cuda
+  dtype: bfloat16
+  payloadmode: pooled_residual

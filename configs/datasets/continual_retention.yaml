@@ -1,0 +1,7 @@
+type: continual_retention
+params:
+  steps: 500
+  seed: 17
+  distractorsperstep: 3
+  probelags: [0, 1, 5, 20, 50, 100, 250]
+  payloadlength: 24

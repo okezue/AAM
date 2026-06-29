@@ -1,0 +1,15 @@
+# Official Qwen-Scope TopK SAE. Pin model_revision and sae_revision before confirmatory runs.
+type: qwen_scope
+params:
+  modelname: Qwen/Qwen3.5-2B-Base
+  saerepoid: Qwen/SAE-Res-Qwen3.5-2B-Base-W32K-L0_50
+  layer: 16
+  tokentopk: 50
+  topk: 128
+  pooling: positive_max
+  maxlength: 4096
+  tokenbatchsize: 32
+  device: cuda
+  saedevice: cuda
+  dtype: bfloat16
+  payloadmode: pooled_residual

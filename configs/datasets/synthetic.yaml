@@ -1,0 +1,14 @@
+type: synthetic
+params:
+  tasks:
+    - paired_associate
+    - paraphrase
+    - multi_hop
+    - temporal_update
+    - interference
+    - hub_distractor
+    - random_string
+    - replay_poison
+  examplespertask: 100
+  distractors: 16
+  seed: 0

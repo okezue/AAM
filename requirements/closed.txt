@@ -1,0 +1,3 @@
+openai>=1.68
+anthropic>=0.49
+google-genai>=1.5

@@ -1,0 +1,71 @@
+name: l3c_byte_budget
+seed: 29
+dataset:
+  type: continual_retention
+  params:
+    steps: 500
+    seed: 29
+    distractorsperstep: 3
+    probelags: [0, 1, 5, 20, 50, 100, 250]
+    payloadlength: 24
+memory:
+  encoder:
+    type: hashing
+    params:
+      dimension: 16384
+      topk: 96
+      wordngrams: [1, 2]
+      positiveonly: true
+      seed: 29
+  graph:
+    rule: covariance
+    learningrate: 0.1
+    temporallearningrate: 0.07
+    decay: 0.001
+    decayinterval: 100
+    maxdegree: 128
+    maxpairfeatures: 96
+    edgecondition: learned
+    edgeseed: 29
+  retrieval:
+    topk: 6
+    candidatelimit: 1000
+    recurrencesteps: 2
+    featuretopk: 192
+    queryanchor: 1.0
+    associationstrength: 0.65
+    temporalstrength: 0.15
+    exactweight: 0.65
+    associativeweight: 0.3
+    temporalweight: 0.05
+  replay:
+    enabled: true
+    strategy: salience
+    intervalwrites: 50
+    budgetpercycle: 8
+    learningscale: 0.2
+    temporal: false
+  consolidation:
+    enabled: true
+    fixedcapacityepisodes: 0
+    fixedcapacitybytes: 8388608
+    similaritythreshold: 0.92
+    minimumgroupsize: 3
+    evictionpolicy: salience
+    rebuildgraphaftermaintenance: true
+  store:
+    type: sqlite
+    path: runs/l3c_byte_budget/memory.sqlite3
+generator:
+  type: none
+evaluation:
+  resetbetweenexamples: false
+  maxtokens: 96
+  bootstrapsamples: 5000
+  clusterkey: cluster_id
+  reportlogicalbytes: true
+outputdir: runs/l3c_byte_budget
+notes: Fixed 8 MiB logical-memory condition for continual retention. Run matched FIFO, LRU,
+  salience, and prototype-consolidation policies with identical encoders, retrieval counts, and
+  checkpoints. The immutable source archive, if used by a comparison, must be charged and reported
+  separately.

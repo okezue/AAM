@@ -1,0 +1,16 @@
+name: c3_hebbian_graph
+seed: 3
+dataset:
+  type: synthetic
+  params: {tasks: [multi_hop, paraphrase, hub_distractor], examplespertask: 30, seed: 3, distractors: 12}
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 32768, topk: 160}}
+  graph: {rule: covariance, learningrate: 0.12, temporallearningrate: 0.02, hubpenalty: 0.8, maxdegree: 96, edgecondition: learned}
+  retrieval: {topk: 5, recurrencesteps: 3, featuretopk: 192, queryanchor: 1.0, associationstrength: 0.75, temporalstrength: 0.05, exactweight: 0.45, associativeweight: 0.45, temporalweight: 0.05}
+  context: {encoder: {dimension: 2048, topk: 32}, binding: {bindingdimension: 4096, topk: 224}}
+  completion: {episodefeedbackstrength: 0.35, episodenodeweight: 0.25}
+generator: {type: none}
+evaluation: {limit: 90, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c3_hebbian_graph
+notes: Tests centered Hebbian graph with query-anchored recurrent completion against zero/shuffled edge ablations.

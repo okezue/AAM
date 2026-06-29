@@ -1,0 +1,56 @@
+name: l4_long_context
+seed: 19
+dataset:
+  type: chunked
+  params:
+    base:
+      type: ruler
+      params:
+        repoid: self-long/RULER-llama3-1M
+        configname: 128k
+        split: train
+        cachedir: data/hf
+    unit: tokens
+    tokenizername: Qwen/Qwen2.5-7B-Instruct
+    chunksize: 1800
+    overlap: 128
+memory:
+  encoder:
+    type: hf_hidden
+    params:
+      modelname: Qwen/Qwen2.5-7B-Instruct
+      layer: 20
+      pooling: mean
+      outputdimension: 65536
+      topk: 192
+      seed: 19
+      maxlength: 2048
+      device: cuda
+      payloadmode: pooled
+  graph:
+    rule: covariance
+    learningrate: 0.08
+    temporallearningrate: 0.06
+    maxdegree: 192
+    maxpairfeatures: 192
+  retrieval:
+    topk: 8
+    recurrencesteps: 2
+    featuretopk: 384
+  store:
+    type: sqlite
+    path: runs/l4_long_context/memory.sqlite3
+generator:
+  type: hf
+  params:
+    modelname: Qwen/Qwen2.5-7B-Instruct
+    device: cuda
+    dtype: bfloat16
+evaluation:
+  resetbetweenexamples: true
+  maxtokens: 128
+  bootstrapsamples: 5000
+outputdir: runs/l4_long_context
+notes: The chunked dataset wrapper materializes long inputs before writes. Compare full
+  attention, Activation Beacon, text RAG, latent kNN, and AAM at equal bytes, retrieved items,
+  and measured recall/generation compute.

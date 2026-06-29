@@ -1,0 +1,6 @@
+type: longbench
+params:
+  repoid: THUDM/LongBench
+  subsets: [narrativeqa, qasper, multifieldqa_en, hotpotqa, 2wikimqa, musique]
+  split: test
+  cachedir: data/hf

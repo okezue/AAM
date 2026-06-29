@@ -1,0 +1,43 @@
+name: l5_closed_hybrid_anthropic
+seed: 23
+dataset:
+  type: longmemeval
+  params:
+    variant: s
+    repoid: xiaowu0162/LongMemEval
+    cachedir: data/hf
+memory:
+  encoder:
+    type: sentence_transformer
+    params:
+      modelname: sentence-transformers/all-MiniLM-L6-v2
+      outputdimension: 32768
+      topk: 128
+      seed: 23
+  graph:
+    rule: covariance
+    learningrate: 0.1
+    temporallearningrate: 0.08
+    maxdegree: 128
+  retrieval:
+    topk: 8
+    recurrencesteps: 2
+    featuretopk: 256
+  store:
+    type: sqlite
+    path: runs/l5_closed_hybrid_anthropic/memory.sqlite3
+generator:
+  type: anthropic_messages
+  params:
+    model: ${ANTHROPIC_MODEL:-claude-sonnet-4-5}
+evaluation:
+  resetbetweenexamples: true
+  maxtokens: 256
+  temperature: 0.0
+  textinjector:
+    maxcharacters: 24000
+    includescores: true
+    includesources: true
+  bootstrapsamples: 5000
+outputdir: runs/l5_closed_hybrid_anthropic
+notes: Hybrid associative retrieval only; exact provider model string should be set by environment and archived.

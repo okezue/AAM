@@ -1,0 +1,11 @@
+type: hf_hidden
+params:
+  modelname: Qwen/Qwen2.5-1.5B-Instruct
+  layer: -1
+  pooling: mean
+  outputdimension: 32768
+  topk: 128
+  seed: 0
+  maxlength: 2048
+  device: cuda
+  payloadmode: pooled

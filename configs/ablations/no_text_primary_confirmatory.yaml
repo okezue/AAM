@@ -1,0 +1,12 @@
+base: configs/experiments/aam_v2_cpu_smoke.yaml
+conditions:
+  - name: aam_v2_no_text_primary
+    memory.safety.notextprimary: true
+    memory.safety.sourcetextrole: audit_only
+  - name: source_text_fallback_audit_only
+    memory.safety.notextprimary: true
+    memory.safety.allowsourcefallbackforexactstrings: true
+  - name: text_rag_negative_control
+    memory.safety.primarysubstrate: raw_text_control_only
+    memory.graph.rule: none
+    recurrencesteps: 0

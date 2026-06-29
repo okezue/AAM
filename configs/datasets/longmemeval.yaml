@@ -1,0 +1,6 @@
+type: longmemeval
+params:
+  variant: s
+  repoid: xiaowu0162/LongMemEval
+  revision: main
+  cachedir: data/hf

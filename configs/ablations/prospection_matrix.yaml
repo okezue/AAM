@@ -1,0 +1,13 @@
+base: configs/experiments/c12_future_simulation.yaml
+conditions:
+  - name: prospective_traces_enabled
+    memory.prospection.enabled: true
+    memory.prospection.authority: 0.05
+  - name: no_prospection
+    memory.prospection.enabled: false
+  - name: higher_prospective_retrieval_authority_safety_test
+    memory.prospection.enabled: true
+    memory.prospection.authority: 0.25
+  - name: maximum_prompts_prefetch
+    memory.prospection.enabled: true
+    memory.prospection.maxprompts: 12

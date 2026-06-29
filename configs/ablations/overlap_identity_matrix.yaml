@@ -1,0 +1,15 @@
+base: configs/experiments/c2_episode_index_identity.yaml
+conditions:
+  - name: full_episode_index
+    memory.completion.episodefeedbackstrength: 0.45
+    memory.completion.episodenodeweight: 0.35
+  - name: vector_only_no_episode_index_feedback
+    memory.completion.episodefeedbackstrength: 0.0
+    memory.completion.episodenodeweight: 0.0
+  - name: no_context_binding_episode_index_only
+    memory.context.binding.contextweight: 0.0
+    memory.context.binding.bindingweight: 0.0
+    memory.completion.contextscoreweight: 0.0
+  - name: weak_episode_authority
+    memory.completion.episodefeedbackstrength: 0.10
+    memory.completion.episodenodeweight: 0.05

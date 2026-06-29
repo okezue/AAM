@@ -1,0 +1,45 @@
+repositories:
+- name: activation_beacon
+  url: https://github.com/FlagOpen/FlagEmbedding.git
+  revision: master
+  purpose: Activation compression baseline and optional payload front-end.
+- name: neurocache
+  url: https://github.com/alisafaya/neurocache.git
+  revision: main
+  purpose: Compressed hidden-state kNN retrieval baseline.
+- name: longmemeval
+  url: https://github.com/xiaowu0162/LongMemEval.git
+  revision: main
+  purpose: Long-term interactive memory evaluation.
+- name: longmemeval_v2
+  url: https://github.com/xiaowu0162/LongMemEval.git
+  revision: main
+  purpose: Agent memory evaluation integration; verify current v2 branch/path upstream.
+- name: ruler
+  url: https://github.com/NVIDIA/RULER.git
+  revision: main
+  purpose: Long-context synthetic benchmark.
+- name: locomo
+  url: https://github.com/snap-research/locomo.git
+  revision: main
+  purpose: Very long conversational memory benchmark.
+- name: larimar
+  url: https://github.com/IBM/larimar.git
+  revision: main
+  purpose: Episodic memory baseline.
+- name: memoryllm
+  url: https://github.com/wangyu-ustc/MemoryLLM.git
+  revision: main
+  purpose: Fixed-size latent memory baseline.
+- name: natural_language_autoencoders
+  url: https://github.com/kitft/natural_language_autoencoders.git
+  revision: main
+  purpose: Optional learned activation payload codec/verbalizer.
+- name: sae_lens
+  url: https://github.com/jbloomAus/SAELens.git
+  revision: main
+  purpose: Public SAE loading and activation analysis.
+- name: nla_inference
+  url: https://github.com/kitft/nla-inference.git
+  revision: main
+  purpose: Lightweight public NLA inference client used by the optional payload adapter.

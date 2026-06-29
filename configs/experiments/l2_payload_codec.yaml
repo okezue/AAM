@@ -1,0 +1,62 @@
+name: l2_payload_codec
+seed: 13
+dataset:
+  type: chunked
+  params:
+    base:
+      type: longbench
+      params:
+        repoid: THUDM/LongBench
+        subsets:
+        - narrativeqa
+        - qasper
+        - hotpotqa
+        - 2wikimqa
+        - musique
+        split: test
+        cachedir: data/hf
+    unit: tokens
+    tokenizername: Qwen/Qwen2.5-1.5B-Instruct
+    chunksize: 1800
+    overlap: 128
+memory:
+  encoder:
+    type: hf_hidden
+    params:
+      modelname: Qwen/Qwen2.5-1.5B-Instruct
+      layer: -1
+      pooling: mean
+      outputdimension: 32768
+      topk: 128
+      seed: 13
+      maxlength: 2048
+      device: cuda
+      payloadmode: pooled
+  graph:
+    rule: covariance
+    learningrate: 0.1
+    temporallearningrate: 0.08
+    maxdegree: 128
+  retrieval:
+    topk: 8
+    recurrencesteps: 2
+    featuretopk: 256
+  store:
+    type: sqlite
+    path: runs/l2_payload_codec/memory.sqlite3
+generator:
+  type: hf
+  params:
+    modelname: Qwen/Qwen2.5-1.5B-Instruct
+    device: cuda
+    dtype: bfloat16
+evaluation:
+  resetbetweenexamples: true
+  maxtokens: 256
+  temperature: 0.0
+  bootstrapsamples: 5000
+outputdir: runs/l2_payload_codec
+notes: Text, int8 pooled-activation, learned-bottleneck, and NLA payload evaluation is
+  wired. Memory-token, side-cross-attention, and direct-KV injection are model-specific
+  integration experiments and must be implemented and validated per backbone. Match logical
+  memory bytes and retrieved items across all conditions.

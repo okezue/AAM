@@ -1,0 +1,16 @@
+name: c4_stdp_temporal
+seed: 4
+dataset:
+  type: synthetic
+  params: {tasks: [multi_hop, temporal_update], examplespertask: 30, seed: 4}
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 32768, topk: 160}}
+  graph: {rule: covariance, learningrate: 0.08, temporallearningrate: 0.16, hubpenalty: 0.6, maxdegree: 128}
+  retrieval: {topk: 5, recurrencesteps: 3, featuretopk: 192, queryanchor: 1.0, associationstrength: 0.50, temporalstrength: 0.35, exactweight: 0.45, associativeweight: 0.30, temporalweight: 0.20, recencyweight: 0.05}
+  context: {encoder: {dimension: 2048, topk: 32}, binding: {bindingdimension: 4096, topk: 224}}
+  dopamine: {positiveweights: {correction: 0.8, novelty: 0.5}}
+generator: {type: none}
+evaluation: {limit: 60, resetbetweenexamples: true, bootstrapsamples: 200}
+outputdir: runs/c4_stdp_temporal
+notes: Directed temporal/STDP-like links for sequence recall and update/supersession.

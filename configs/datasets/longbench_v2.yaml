@@ -1,0 +1,5 @@
+type: longbench_v2
+params:
+  repoid: THUDM/LongBench-v2
+  split: train
+  cachedir: data/hf

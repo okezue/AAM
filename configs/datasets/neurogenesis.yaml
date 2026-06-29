@@ -1,0 +1,5 @@
+type: neurogenesis
+params:
+  examplespertask: 25
+  seed: 0
+  distractors: 10

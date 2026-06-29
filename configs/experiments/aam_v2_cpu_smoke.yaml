@@ -1,0 +1,21 @@
+name: aam_v2_cpu_smoke
+seed: 42
+dataset:
+  type: synthetic
+  params:
+    tasks: [paired_associate, multi_hop, replay_poison]
+    examplespertask: 4
+    seed: 42
+memory:
+  variant: aam_v2
+  encoder: {type: hashing, params: {dimension: 4096, topk: 64}}
+  graph: {rule: covariance, learningrate: 0.10, temporallearningrate: 0.06, hubpenalty: 0.7, maxdegree: 64}
+  retrieval: {topk: 3, recurrencesteps: 2, featuretopk: 96, exactweight: 0.50, associativeweight: 0.35, temporalweight: 0.10, confidenceweight: 0.05}
+  context: {encoder: {dimension: 512, topk: 24}, binding: {bindingdimension: 512, topk: 112}}
+  replay: {enabled: true, intervalwrites: 10, budgetpercycle: 4, learningscale: 0.15}
+  neurogenesis: {enabled: true, reservedfeatures: 32, birththreshold: 0.45}
+  prospection: {enabled: true, maxprompts: 3, authority: 0.05}
+generator: {type: none}
+evaluation: {limit: 12, resetbetweenexamples: true, bootstrapsamples: 50}
+outputdir: runs/aam_v2_cpu_smoke
+notes: Fast CPU smoke test for the complete AAM-v2 path.

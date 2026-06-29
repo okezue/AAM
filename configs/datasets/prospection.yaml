@@ -1,0 +1,4 @@
+type: prospection
+params:
+  examplespertask: 25
+  seed: 0

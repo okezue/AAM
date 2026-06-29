@@ -1,0 +1,20 @@
+base: configs/experiments/c6_dopamine_gated_writes.yaml
+conditions:
+  - name: full_dopamine_gate
+    memory.dopamine.positiveweights.novelty: 0.9
+    memory.dopamine.positiveweights.useremphasis: 0.8
+    memory.dopamine.positiveweights.poisonrisk: -1.5
+  - name: uniform_writes
+    memory.dopamine.positiveweights.novelty: 0.0
+    memory.dopamine.positiveweights.useremphasis: 0.0
+    memory.dopamine.positiveweights.downstreamutility: 0.0
+    memory.dopamine.positiveweights.poisonrisk: 0.0
+  - name: novelty_only
+    memory.dopamine.positiveweights.novelty: 1.2
+    memory.dopamine.positiveweights.useremphasis: 0.0
+    memory.dopamine.positiveweights.downstreamutility: 0.0
+    memory.dopamine.positiveweights.poisonrisk: 0.0
+  - name: user_emphasis_only
+    memory.dopamine.positiveweights.novelty: 0.0
+    memory.dopamine.positiveweights.useremphasis: 1.2
+    memory.dopamine.positiveweights.poisonrisk: 0.0

@@ -1,0 +1,4 @@
+type: state_tensor
+params:
+  examplespertask: 25
+  seed: 0

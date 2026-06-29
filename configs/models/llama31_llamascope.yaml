@@ -1,0 +1,10 @@
+# Llama Scope publishes layer/sublayer TopK SAEs for Llama-3.1-8B Base.
+type: sae_lens
+params:
+  modelname: meta-llama/Llama-3.1-8B
+  saerelease: llama_scope_lxr_8x
+  saeid: PLACEHOLDER_SELECT_LAYER_SITE_AND_WIDTH
+  topk: 128
+  pooling: positive_max
+  maxlength: 4096
+  device: cuda

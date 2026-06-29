@@ -9,9 +9,9 @@ htmlcov/
 build/
 dist/
 *.egg-info/
-data/
-runs/
-checkpoints/
+/data/
+/runs/
+/checkpoints/
 wandb/
 .env
 .DS_Store

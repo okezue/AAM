@@ -1,7 +1,6 @@
 from __future__ import annotations
 import json
 import math
-from collections import defaultdict
 from collections.abc import Mapping
 from dataclasses import asdict
 from pathlib import Path
